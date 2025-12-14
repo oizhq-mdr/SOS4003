@@ -119,21 +119,32 @@ class HateScoreAnalyzer:
 
             # Process results
             for i, valid_idx in enumerate(valid_indices):
-                # Find the category with highest probability
-                max_prob_idx = int(np.argmax(probs[i]))
-                max_prob_label = self.hate_labels[max_prob_idx]
-                max_prob_value = float(probs[i][max_prob_idx])
-
-                # 'None' means non-hate (정상 댓글)
-                is_none = max_prob_label == 'None' or 'none' in max_prob_label.lower()
-
+                # Find None category index
+                none_idx = None
+                for j, label in enumerate(self.hate_labels):
+                    if label == 'None' or 'none' in label.lower():
+                        none_idx = j
+                        break
+                
+                # Get None probability
+                none_prob = float(probs[i][none_idx]) if none_idx is not None else 0.0
+                
                 # Calculate hate score (max prob among hate categories, excluding None)
                 non_none_indices = [j for j, label in enumerate(self.hate_labels)
                                    if label != 'None' and 'none' not in label.lower()]
                 hate_score = float(np.max(probs[i][non_none_indices])) if non_none_indices else 0.0
 
-                # Determine if hate speech based on highest probability category
-                is_hate = not is_none
+                # Determine if hate speech based on threshold
+                # Priority logic:
+                # 1. If None probability >= threshold → NOT hate (정상 댓글)
+                # 2. Otherwise, if hate_score > threshold → IS hate (악플)
+                # 3. Otherwise → NOT hate (애매한 경우는 정상으로 처리)
+                if none_prob >= threshold:
+                    is_hate = False
+                elif hate_score > threshold:
+                    is_hate = True
+                else:
+                    is_hate = False
 
                 # Get hate categories above threshold (only if is_hate)
                 hate_categories = []
