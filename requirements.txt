@@ -1,0 +1,26 @@
+# 데이터 처리
+pandas>=1.5.0
+numpy>=1.23.0
+
+# 파일 변환
+xlsx2csv
+
+# 텍스트 전처리
+kiwipiepy
+emoji
+
+# 딥러닝
+transformers>=4.30.0
+torch>=2.0.0
+
+# 시각화
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+wordcloud>=1.9.0
+
+# 통계 분석
+scipy>=1.10.0
+
+# 진행바
+tqdm

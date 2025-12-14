@@ -1,0 +1,16 @@
+{
+  "total_comments": 156655,
+  "total_videos": 342,
+  "total_programs": 36,
+  "positive_count": 27042,
+  "negative_count": 15162,
+  "neutral_count": 114451,
+  "positive_ratio": 0.1726213654208292,
+  "negative_ratio": 0.09678593086719224,
+  "neutral_ratio": 0.7305927037119786,
+  "avg_positive_score": 0.4205228048897258,
+  "avg_negative_score": 0.28101241581819925,
+  "avg_total_score": 0.1395103890715266,
+  "std_total_score": 1.2943820241473079,
+  "avg_matched_words": 0.5193705914270211
+}
