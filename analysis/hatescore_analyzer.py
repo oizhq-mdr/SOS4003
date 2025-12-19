@@ -134,11 +134,6 @@ class HateScoreAnalyzer:
                                    if label != 'None' and 'none' not in label.lower()]
                 hate_score = float(np.max(probs[i][non_none_indices])) if non_none_indices else 0.0
 
-                # Determine if hate speech based on threshold
-                # Priority logic:
-                # 1. If None probability >= threshold → NOT hate (정상 댓글)
-                # 2. Otherwise, if hate_score > threshold → IS hate (악플)
-                # 3. Otherwise → NOT hate (애매한 경우는 정상으로 처리)
                 if none_prob >= threshold:
                     is_hate = False
                 elif hate_score > threshold:
